@@ -314,6 +314,7 @@ class MiniGPT4(BaseModel):
         )
 
         ckpt_path = cfg.get("ckpt", "")  # load weights of MiniGPT-4
+        ckpt_path = False
         if ckpt_path:
             ckpt = torch.load(ckpt_path, map_location="cpu")
             msg = model.load_state_dict(ckpt['model'], strict=False)

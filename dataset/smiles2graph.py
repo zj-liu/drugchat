@@ -79,9 +79,9 @@ def smiles2graph(smiles_string):
     return graph 
 
 
-def convert_chembl():
+def convert_PubChem():
     # with open("/home/youwei/project/drugchat/data/ChEMBL_QA_train.json", "rt") as f:
-    with open("/home/youwei/project/drugchat/data/PubChem_QA.json", "rt") as f:
+    with open("./data/PubChem_QA.json", "rt") as f:
         js = json.load(f)
     out = []
     for smi, rec in js.items():
@@ -94,7 +94,23 @@ def convert_chembl():
         pickle.dump(out, f)
 
 
+def convert_chembl():
+    # with open("/home/youwei/project/drugchat/data/ChEMBL_QA_train.json", "rt") as f:
+    with open("./data/ChEMBL_QA_train.json", "rt") as f:
+        js = json.load(f)
+    out = []
+    for smi, rec in js.items():
+        graph = smiles2graph(smi)
+        for question, answer in rec:
+            out.append({"graph": graph, "question": question, "answer": str(answer)})
+
+    
+    with open("./dataset/chembl_QA_train.pkl", "wb") as f:
+        pickle.dump(out, f)
+        
+
 if __name__ == '__main__':
     # graph = smiles2graph('O1C=C[C@H]([C@H]1O2)c3c2cc(OC)c4c3OC(=O)C5=C4CCC(=O)5')
     # print(graph)
+    convert_PubChem()
     convert_chembl()

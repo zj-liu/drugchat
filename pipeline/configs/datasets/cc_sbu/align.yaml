@@ -2,4 +2,4 @@ datasets:
   cc_sbu_align:
     data_type: images
     build_info:
-      storage: dataset/chembl_pyg_abs3.pkl
+      storage: dataset/chembl_pubchem_train.pkl
